@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youth Appearance Anxiety Scale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .instructions {
+            padding: 25px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .instructions h2 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .instructions p {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .gender-selection {
+            padding: 20px 25px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .gender-selection label {
+            margin-right: 20px;
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .questionnaire {
+            padding: 25px;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #495057;
+            line-height: 1.5;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+        
+        .option {
+            text-align: center;
+        }
+        
+        .option input {
+            display: none;
+        }
+        
+        .option label {
+            display: block;
+            padding: 10px 5px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #6c757d;
+        }
+        
+        .option input:checked + label {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .option label:hover {
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .result {
+            display: none;
+            padding: 30px;
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .result h2 {
+            color: #495057;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 48px;
+            font-weight: 700;
+            color: #667eea;
+            margin: 20px 0;
+        }
+        
+        .level {
+            font-size: 24px;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        
+        .low {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .relatively-low {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .relatively-high {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .high {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .interpretation {
+            margin-top: 20px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            .option label {
+                text-align: left;
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Youth Appearance Anxiety Scale (Chinese Version)</h1>
+            <p>Please rate the following statements based on how much you agree with them</p>
+        </div>
+        
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <p><strong>1 = Strongly disagree</strong> - I completely disagree with this statement</p>
+            <p><strong>2 = Basically disagree</strong> - I tend to disagree with this statement</p>
+            <p><strong>3 = Neutral</strong> - I neither agree nor disagree with this statement</p>
+            <p><strong>4 = Basically agree</strong> - I tend to agree with this statement</p>
+            <p><strong>5 = Strongly agree</strong> - I completely agree with this statement</p>
+        </div>
+        
+        <div class="gender-selection">
+            <label>
+                <input type="radio" name="gender" value="male"> Male
+            </label>
+            <label>
+                <input type="radio" name="gender" value="female"> Female
+            </label>
+        </div>
+        
+        <form id="questionnaireForm" class="questionnaire">
+            <!-- Questions will be dynamically inserted here -->
+        </form>
+        
+        <button type="button" id="submitBtn" class="submit-btn">Submit</button>
+        
+        <div id="result" class="result">
+            <h2>Your Appearance Anxiety Score</h2>
+            <div class="score" id="scoreValue">0</div>
+            <div class="level" id="anxietyLevel">Low</div>
+            <div class="interpretation" id="interpretation">
+                Based on your responses, you appear to have low levels of appearance anxiety.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Questions array
+        const questions = [
+            "I always spend a lot of time and effort covering up my appearance flaws (e.g., makeup).",
+            "I often search for topics related to appearance on social media.",
+            "I feel very nervous when taking photos.",
+            "I always worry that others are talking about my appearance behind my back.",
+            "I feel anxious when others discuss how to enhance their appearance.",
+            "I feel uncomfortable when I'm around people who look better than me.",
+            "I feel unnatural when I know others are focused on my appearance.",
+            "I fear that, even with effort, my figure will not meet ideal standards.",
+            "I frequently search for topics related to improving or maintaining my figure on social media.",
+            "I avoid taking photos due to my body shape.",
+            "I worry that my body lacks attractiveness.",
+            "I reduce my participation in social activities due to my body shape.",
+            "I refrain from shopping due to my body shape.",
+            "I constantly worry about others making negative evaluations about my body.",
+            "I often fear others will pay attention to, mention, or talk about my figure.",
+            "I avoid looking in the mirror due to my body shape.",
+            "I always worry that my figure will be compared to others.",
+            "I avoid weighing myself because of my body shape.",
+            "Even indoors or on cloudy days, I worry about my skin getting worse.",
+            "I feel uneasy when people discuss skin-related issues.",
+            "I constantly worry that my skin condition will be compared to others.",
+            "I fear that people won't like me because of my skin.",
+            "I try to cover my face with a mask to avoid being focused on my skin in social situations.",
+            "I frequently search for skincare-related topics on social media.",
+            "I reduce my appearances in public due to my skin condition."
+        ];
+
+        // Initialize questionnaire
+        const form = document.getElementById('questionnaireForm');
+        
+        questions.forEach((question, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            
+            const questionText = document.createElement('div');
+            questionText.className = 'question-text';
+            questionText.textContent = `${index + 1}. ${question}`;
+            
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'options';
+            
+            // Create 5 options for each question
+            for (let i = 1; i <= 5; i++) {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = `q${index + 1}`;
+                input.value = i;
+                input.id = `q${index + 1}o${i}`;
+                input.required = true;
+                
+                const label = document.createElement('label');
+                label.htmlFor = `q${index + 1}o${i}`;
+                label.textContent = i;
+                
+                optionDiv.appendChild(input);
+                optionDiv.appendChild(label);
+                optionsDiv.appendChild(optionDiv);
+            }
+            
+            questionDiv.appendChild(questionText);
+            questionDiv.appendChild(optionsDiv);
+            form.appendChild(questionDiv);
+        });
+
+        // Handle form submission
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            // Check if all questions are answered
+            let allAnswered = true;
+            for (let i = 1; i <= 25; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                if (!selectedOption) {
+                    allAnswered = false;
+                    break;
+                }
+            }
+            
+            if (!allAnswered) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+            
+            // Calculate total score
+            let totalScore = 0;
+            for (let i = 1; i <= 25; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                totalScore += parseInt(selectedOption.value);
+            }
+            
+            // Determine anxiety level
+            let level, levelClass, interpretation;
+            
+            if (totalScore >= 25 && totalScore <= 50) {
+                level = "Low Anxiety";
+                levelClass = "low";
+                interpretation = "Your responses indicate low levels of appearance anxiety. You generally feel comfortable with your appearance and don't experience significant distress related to how you look.";
+            } else if (totalScore > 50 && totalScore <= 75) {
+                level = "Relatively Low Anxiety";
+                levelClass = "relatively-low";
+                interpretation = "You experience some appearance-related concerns but they don't significantly impact your daily life. You may have occasional worries about your appearance but generally maintain a healthy perspective.";
+            } else if (totalScore > 75 && totalScore <= 100) {
+                level = "Relatively High Anxiety";
+                levelClass = "relatively-high";
+                interpretation = "Your responses suggest you experience notable appearance anxiety that may affect some aspects of your life. You might benefit from learning coping strategies to manage these concerns.";
+            } else {
+                level = "High Anxiety";
+                levelClass = "high";
+                interpretation = "Your score indicates high levels of appearance anxiety that likely impact your daily functioning and well-being. Consider seeking support to address these concerns in a healthy way.";
+            }
+            
+            // Display results
+            document.getElementById('scoreValue').textContent = totalScore;
+            document.getElementById('anxietyLevel').textContent = level;
+            document.getElementById('anxietyLevel').className = `level ${levelClass}`;
+            document.getElementById('interpretation').textContent = interpretation;
+            
+            // Show result section
+            document.getElementById('result').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
